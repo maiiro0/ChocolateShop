@@ -3,10 +3,11 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Product;
+use App\Entity\Slider;
 use App\Enum\ChocolateEnum;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class ProductTest extends TestCase
+final class ProductTest extends WebTestCase
 {
     public function testProductCanBeReadImmediatelyAfterCreation(): void
     {
@@ -19,5 +20,26 @@ final class ProductTest extends TestCase
         self::assertSame('France', $product->getCountry());
         self::assertFalse($product->isBestSeller());
         self::assertNull($product->getId());
+    }
+
+    public function testHomePageDisplaysTheInMemorySlider(): void
+    {
+        $slider = (new Slider())
+            ->setMessage('À découvrir')
+            ->setTitle('Nouveautés chocolatées')
+            ->setContent('Une sélection de chocolats à savourer et à partager.')
+            ->setButtonLink('/product')
+            ->setButtonText('Découvrir la collection');
+
+        self::assertSame('Nouveautés chocolatées', $slider->getTitle());
+
+        $client = static::createClient();
+        $client->request('GET', '/');
+
+        self::assertResponseIsSuccessful();
+        self::assertSelectorTextContains(
+            'section[aria-label="À la une"]',
+            'Nouveautés chocolatées',
+        );
     }
 }

@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<main>
+    <h1>Accueil</h1>
+    <section aria-label="À la une">
+        {% for slide in slides %}
+            <article>
+                {% if slide.getMessage() %}
+                    <p>{{ slide.getMessage() }}</p>
+                {% endif %}
+                <h2>{{ slide.getTitle() }}</h2>
+                <p>{{ slide.getContent() }}</p>
+                <a href="{{ path('app_products') }}">{{ slide.getButtonText() }}</a>
+            </article>
+        {% else %}
+            <p>Aucune diapositive à afficher.</p>
+        {% endfor %}
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <section aria-labelledby="about-title">
+        <h2 id="about-title">À propos</h2>
+        <p>Nous sélectionnons avec soin des chocolats de qualité pour partager le plaisir du cacao.</p>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/slitherwing/Desktop/BTS 2/ChocolateShop/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/Users/slitherwing/Desktop/BTS 2/ChocolateShop/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <section aria-labelledby="best-sellers-title">
+        <h2 id="best-sellers-title">Nos tendances</h2>
+        {% for product in bestSellers %}
+            {% include 'product/_card.html.twig' with {product: product} only %}
+        {% else %}
+            <p>Aucun produit tendance pour le moment.</p>
+        {% endfor %}
+    </section>
+
+    <section aria-labelledby="testimonials-title">
+        <h2 id="testimonials-title">Témoignages</h2>
+        <figure>
+            <blockquote>Des chocolats délicieux et une belle découverte à chaque commande.</blockquote>
+            <figcaption>Camille, cliente</figcaption>
+        </figure>
+        <figure>
+            <blockquote>Une sélection soignée, parfaite pour offrir.</blockquote>
+            <figcaption>Alexandre, client</figcaption>
+        </figure>
+    </section>
+</main>
 {% endblock %}
