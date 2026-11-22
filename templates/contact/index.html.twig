@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contact - Chocoshop{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/slitherwing/Desktop/BTS 2/ChocolateShop/src/Controller/ContactController.php</code></li>
-        <li>Your template at <code>/Users/slitherwing/Desktop/BTS 2/ChocolateShop/templates/contact/index.html.twig</code></li>
-    </ul>
+    <p>Entrer en contact</p>
+    <h1>Nous serions ravis d'avoir de vos nouvelles.</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.message) }}
+        <button type="submit">Envoyer</button>
+    {{ form_end(form) }}
 </div>
 {% endblock %}
