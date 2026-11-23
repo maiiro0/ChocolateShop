@@ -42,4 +42,30 @@ final class ProductTest extends WebTestCase
             'Nouveautés chocolatées',
         );
     }
+
+    public function testProductPageDisplaysTheFilterForm(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/product');
+
+        self::assertResponseIsSuccessful();
+        self::assertSelectorExists('form[method="get"]');
+        self::assertSelectorExists('select[name="brand"]');
+        self::assertSelectorExists('select[name="brand"] option[value="Maison Cacao"]');
+        self::assertSelectorExists('select[name="category"]');
+        self::assertSelectorExists('select[name="category"] option[value="Tablettes"]');
+        self::assertSelectorExists('input[name="price"]');
+        self::assertSelectorTextContains('section[aria-label="Produits"]', 'Tablette Noir Intense');
+    }
+
+    public function testProductPageFiltersByBrandCategoryAndMaximumPrice(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/product?brand=Maison%20Cacao&category=Tablettes&price=5');
+
+        self::assertResponseIsSuccessful();
+        self::assertSelectorTextContains('section[aria-label="Produits"]', 'Tablette au Lait');
+        self::assertSelectorTextNotContains('section[aria-label="Produits"]', 'Tablette Noir Intense');
+        self::assertSelectorTextNotContains('section[aria-label="Produits"]', 'Pralinés de Montagne');
+    }
 }
