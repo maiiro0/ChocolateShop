@@ -32,7 +32,7 @@ class Product
         #[ORM\Column(enumType: ChocolateEnum::class)]
         private ChocolateEnum $family,
         #[ORM\Column(length: 255)]
-        private string $Country,
+        private string $country,
         #[ORM\Column]
         private bool $best_seller,
     ) {
@@ -98,14 +98,14 @@ class Product
         return $this;
     }
 
-    public function getCountry(): string
+    public function getcountry(): string
     {
-        return $this->Country;
+        return $this->country;
     }
 
-    public function setCountry(string $Country): static
+    public function setCountry(string $country): static
     {
-        $this->Country = $Country;
+        $this->country = $country;
 
         return $this;
     }
