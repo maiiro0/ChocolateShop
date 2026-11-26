@@ -3,16 +3,20 @@
 {% block title %}Contact - Chocoshop{% endblock %}
 
 {% block body %}
-<div class="contact-page">
-    <p>Entrer en contact</p>
-    <h1>Nous serions ravis d'avoir de vos nouvelles.</h1>
-    {{ form_start(form) }}
+    <div class="contact-page">
+        {% embed 'component/_card.html.twig' %}
+            {% block card_content %}
+                <p>Entrer en contact</p>
+                <p>Nous serions ravis d'avoir de vos nouvelles.</p>
+            {% endblock %}
+        {% endembed %}
+        {{ form_start(form) }}
         {{ form_row(form.lastName) }}
         {{ form_row(form.firstName) }}
         {{ form_row(form.email) }}
         {{ form_row(form.phone) }}
         {{ form_row(form.message) }}
         <button type="submit">Envoyer</button>
-    {{ form_end(form) }}
-</div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

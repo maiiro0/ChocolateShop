@@ -18,9 +18,11 @@
             <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
-    <body>
+    <body class="w-full h-screen flex flex-col">
         {% include 'component/header.html.twig' %}
-        {% block body %}{% endblock %}
+        <div class="page-padding">
+            {% block body %}{% endblock %}
+        </div>
         {% include 'component/footer.html.twig' %}
     </body>
 </html>
