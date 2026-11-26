@@ -3,39 +3,45 @@
 {% block title %}Catalogue{% endblock %}
 
 {% block body %}
-<main>
-    <h1>Catalogue</h1>
+    <main>
+        <p>Catalogue</p>
 
-    <form method="get" action="{{ path('app_products') }}">
-        <label for="brand">Marque</label>
-        <select id="brand" name="brand">
-            <option value="">Toutes les marques</option>
-            {% for brand in brands %}
-                <option value="{{ brand }}" {{ filters.brand == brand ? 'selected' : '' }}>{{ brand }}</option>
+        <form method="get" action="{{ path('app_products') }}">
+            <label for="brand">Marque</label>
+            <select id="brand" name="brand">
+                <option value="">Toutes les marques</option>
+                {% for brand in brands %}
+                    <option value="{{ brand }}" {{ filters.brand == brand ? 'selected' : '' }}>{{ brand }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="category">Catégorie</label>
+            <select id="category" name="category">
+                <option value="">Toutes les catégories</option>
+                {% for category in categories %}
+                    <option value="{{ category }}" {{ filters.category == category ? 'selected' : '' }}>{{ category }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="price">Prix maximum (€)</label>
+            <input
+                id="price"
+                name="price"
+                type="number"
+                min="0"
+                step="0.01"
+                value="{{ filters.price is not null ? filters.price : '' }}"
+            >
+
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <section aria-label="Produits">
+            {% for product in products %}
+                {% include 'product/_card.html.twig' with {product: product} only %}
+            {% else %}
+                <p>Aucun produit à afficher.</p>
             {% endfor %}
-        </select>
-
-        <label for="category">Catégorie</label>
-        <select id="category" name="category">
-            <option value="">Toutes les catégories</option>
-            {% for category in categories %}
-                <option value="{{ category }}" {{ filters.category == category ? 'selected' : '' }}>{{ category }}</option>
-            {% endfor %}
-        </select>
-
-        <label for="price">Prix maximum (€)</label>
-        <input id="price" name="price" type="number" min="0" step="0.01"
-               value="{{ filters.price is not null ? filters.price : '' }}">
-
-        <button type="submit">Rechercher</button>
-    </form>
-
-    <section aria-label="Produits">
-        {% for product in products %}
-            {% include 'product/_card.html.twig' with {product: product} only %}
-        {% else %}
-            <p>Aucun produit à afficher.</p>
-        {% endfor %}
-    </section>
-</main>
+        </section>
+    </main>
 {% endblock %}
