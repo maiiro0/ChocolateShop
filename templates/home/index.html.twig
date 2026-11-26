@@ -4,7 +4,11 @@
 
 {% block body %}
     <main>
-        <p>Accueil</p>
+        {% embed 'component/_card.html.twig' %}
+            {% block card_content %}
+                <p>Accueil</p>
+            {% endblock %}
+        {% endembed %}
         <section aria-label="À la une">
             {% for slide in slides %}
                 <article>

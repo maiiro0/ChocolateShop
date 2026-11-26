@@ -4,8 +4,12 @@
 
 {% block body %}
     <div class="contact-page">
-        <p>Entrer en contact</p>
-        <p>Nous serions ravis d'avoir de vos nouvelles.</p>
+        {% embed 'component/_card.html.twig' %}
+            {% block card_content %}
+                <p>Entrer en contact</p>
+                <p>Nous serions ravis d'avoir de vos nouvelles.</p>
+            {% endblock %}
+        {% endembed %}
         {{ form_start(form) }}
         {{ form_row(form.lastName) }}
         {{ form_row(form.firstName) }}
