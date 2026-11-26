@@ -4,19 +4,19 @@ namespace App\Service;
 
 final class ProductCatalog
 {
-    private const BRANDS = [
+    private const array BRANDS = [
         'Maison Cacao',
         'Chocolaterie des Alpes',
         'Douceur de Paris',
     ];
 
-    private const CATEGORIES = [
+    private const array CATEGORIES = [
         'Tablettes',
         'Bonbons',
         'Coffrets',
     ];
 
-    private const PRODUCTS = [
+    private const array PRODUCTS = [
         ['name' => 'Tablette Noir Intense', 'price' => 5.50, 'brand' => 'Maison Cacao', 'category' => 'Tablettes'],
         ['name' => 'Pralinés de Montagne', 'price' => 12.90, 'brand' => 'Chocolaterie des Alpes', 'category' => 'Bonbons'],
         ['name' => 'Coffret Découverte', 'price' => 24.00, 'brand' => 'Douceur de Paris', 'category' => 'Coffrets'],
@@ -25,25 +25,28 @@ final class ProductCatalog
         ['name' => 'Coffret des Alpes', 'price' => 29.90, 'brand' => 'Chocolaterie des Alpes', 'category' => 'Coffrets'],
     ];
 
-    /**
-     * @return string[]
-     */
+
     public function getBrands(): array
     {
         return self::BRANDS;
     }
 
-    /**
-     * @return string[]
-     */
     public function getCategories(): array
     {
         return self::CATEGORIES;
     }
 
-    /**
-     * @return array<array{name: string, price: float, brand: string, category: string}>
-     */
+
+    public function getProducts(): array
+    {
+        return self::PRODUCTS;
+    }
+
+    public function getBestSellers(): array
+    {
+        return array_slice(self::PRODUCTS, 0, 3);
+    }
+
     public function getFilteredProducts(?string $brand, ?string $category, ?float $maximumPrice): array
     {
          $filteredProducts = [];

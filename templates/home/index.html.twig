@@ -13,7 +13,7 @@
                 {% endif %}
                 <h2>{{ slide.getTitle() }}</h2>
                 <p>{{ slide.getContent() }}</p>
-                <a href="{{ path('app_products') }}">{{ slide.getButtonText() }}</a>
+                <a href="{{ slide.getButtonLink() }}">{{ slide.getButtonText() }}</a>
             </article>
         {% else %}
             <p>Aucune diapositive à afficher.</p>
