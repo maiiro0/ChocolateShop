@@ -45,9 +45,13 @@ final class ProductTest extends WebTestCase
             'section[aria-labelledby="best-sellers-title"]',
             'Tablette Noir Intense',
         );
+        self::assertCount(
+            12,
+            $client->getCrawler()->filter('[data-product-carousel] [data-carousel-slide]'),
+        );
         self::assertSelectorTextContains(
-            'section[aria-labelledby="best-sellers-title"]',
-            'Pralinés de Montagne',
+            '[data-product-carousel] [data-carousel-slide]:last-child',
+            'Assortiment de fête',
         );
     }
 

@@ -5,9 +5,58 @@
 {% block body %}
 <main>
     <h1>Accueil</h1>
+    <section class="flex justify-between gap-8 py-8">
+        <div>
+            <h2 class="text-5xl font-bold mb-4 text-[#351C17] pt-4">Une passion qui se partage</h2>
+            <p class="text-[#351C17] font-black text-2xl">Chez Maison Cacao, nous sélectionnons des fèves d’exception 
+                et les travaillons avec patience. Chaque création raconte 
+                une origine, un geste et une émotion.</p>
+        </div>
+        <div>
+            <img src="{{ asset('images/PartagePassion.svg') }}" alt="Passion Chocolat" class="rounded-xl shadow-md w-250">
+        </div>
+    </section>
+
+    <section aria-labelledby="best-sellers-title" class="py-12">
+        <h2 id="best-sellers-title" class="mb-6 text-3xl font-bold text-[#351C17]">Nos chocolats à découvrir</h2>
+        <div data-product-carousel role="region" aria-roledescription="carrousel" aria-label="Produits à découvrir">
+            <div class="overflow-hidden" data-carousel-viewport>
+                <div class="flex touch-pan-y -ml-4 md:-ml-6" data-carousel-container>
+                    {% for product in bestSellers %}
+                        <div class="min-w-0 flex-[0_0_100%] pl-4 md:flex-[0_0_50%] md:pl-6 xl:flex-[0_0_25%]" data-carousel-slide>
+                            {% include 'product/_card.html.twig' with {product: product} only %}
+                        </div>
+                    {% else %}
+                        <p>Aucun produit à afficher.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mt-6 flex items-center justify-between gap-4">
+                <div class="flex gap-3">
+                    <button class="rounded-full border border-[#351C17] p-3 text-[#351C17] disabled:cursor-not-allowed disabled:opacity-40" type="button" data-carousel-prev aria-label="Produits précédents">
+                        <svg class="h-5 w-5" viewBox="0 0 532 532" aria-hidden="true">
+                            <path fill="currentColor" d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"></path>
+                        </svg>
+                    </button>
+                    <button class="rounded-full border border-[#351C17] p-3 text-[#351C17] disabled:cursor-not-allowed disabled:opacity-40" type="button" data-carousel-next aria-label="Produits suivants">
+                        <svg class="h-5 w-5 rotate-180" viewBox="0 0 532 532" aria-hidden="true">
+                            <path fill="currentColor" d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center gap-2" data-carousel-dots role="group" aria-label="Choisir une page de produits"></div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    
+    
+    
     <section aria-label="À la une">
         {% for slide in slides %}
-            <article>
+            <article class="flex p-5 rounded-lg bg-gray-100 shadow-md">
                 {% if slide.getMessage() %}
                     <p>{{ slide.getMessage() }}</p>
                 {% endif %}
@@ -23,15 +72,6 @@
     <section aria-labelledby="about-title">
         <h2 id="about-title">À propos</h2>
         <p>Nous sélectionnons avec soin des chocolats de qualité pour partager le plaisir du cacao.</p>
-    </section>
-
-    <section aria-labelledby="best-sellers-title">
-        <h2 id="best-sellers-title">Nos tendances</h2>
-        {% for product in bestSellers %}
-            {% include 'product/_card.html.twig' with {product: product} only %}
-        {% else %}
-            <p>Aucun produit tendance pour le moment.</p>
-        {% endfor %}
     </section>
 
     <section aria-labelledby="testimonials-title">

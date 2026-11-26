@@ -1,6 +1,6 @@
 <article>
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.price }} €</p>
-    <p>Marque : {{ product.brand }}</p>
-    <p>Catégorie : {{ product.category }}</p>
+    <img src="{{ asset('images/produits/' ~ product.image) }}" alt="{{ product.name }}" class="w-60 rounded-xl shadow-md">
+    <h2 class="text-xl font-bold mb-2 text-[#351C16]">{{ product.name }}</h2>
+    <p class="text-[#71584C]">{{ product.brand }} -  {{ product.category }}</p>
+    <p class="text-lg font-semibold text-[#351C16]">{{ product.price }} €</p>
 </article>
