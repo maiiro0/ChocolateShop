@@ -41,6 +41,14 @@ final class ProductTest extends WebTestCase
             'section[aria-label="À la une"]',
             'Nouveautés chocolatées',
         );
+        self::assertSelectorTextContains(
+            'section[aria-labelledby="best-sellers-title"]',
+            'Tablette Noir Intense',
+        );
+        self::assertSelectorTextContains(
+            'section[aria-labelledby="best-sellers-title"]',
+            'Pralinés de Montagne',
+        );
     }
 
     public function testProductPageDisplaysTheFilterForm(): void
