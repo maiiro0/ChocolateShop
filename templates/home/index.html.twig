@@ -4,7 +4,21 @@
 
 {% block body %}
 <main>
-    <h1>Accueil</h1>
+    {% embed 'component/_card.html.twig' %}
+        {% block card_content %}
+            <section class="flex p-3 gap-8 justify-between">
+                <div>
+                    <p class="text-[#B57842] font-bold py-4">CHOCOLATERIE ARTISANALE · DEPUIS 1998</p>
+                    <p class="font-bold text-5xl pb-4">Le goût du cacao, l’art de l’exception.</p>
+                    <p class="font-black text-2xl pb-10">Des créations délicates façonnées à la main, pour transformer chaque instant en plaisir.</p>
+                    <button class="bg-[#B57842] rounded-full font-bold text-white py-2 px-4 hover:bg-[#8B4513]">Découvrir nos chocolats</button>
+                </div>
+                <div>
+                    <img src="{{ asset('images/Main.svg') }}" alt="Chocolat Artisanal" class="rounded-xl shadow-md w-250">
+                </div>
+            </section>
+        {% endblock %}
+    {% endembed %}
     <section class="flex justify-between gap-8 py-8">
         <div>
             <h2 class="text-5xl font-bold mb-4 text-[#351C17] pt-4">Une passion qui se partage</h2>
@@ -50,39 +64,19 @@
     </section>
 
 
-    
-    
-    
-    
-    <section aria-label="À la une">
-        {% for slide in slides %}
-            <article class="flex p-5 rounded-lg bg-gray-100 shadow-md">
-                {% if slide.getMessage() %}
-                    <p>{{ slide.getMessage() }}</p>
-                {% endif %}
-                <h2>{{ slide.getTitle() }}</h2>
-                <p>{{ slide.getContent() }}</p>
-                <a href="{{ slide.getButtonLink() }}">{{ slide.getButtonText() }}</a>
-            </article>
-        {% else %}
-            <p>Aucune diapositive à afficher.</p>
-        {% endfor %}
-    </section>
-
-        <section aria-labelledby="about-title">
-            <h2 id="about-title">À propos</h2>
-            <p>Nous sélectionnons avec soin des chocolats de qualité pour partager le plaisir du cacao.</p>
-        </section>
-
-    <section aria-labelledby="testimonials-title">
-        <h2 id="testimonials-title">Témoignages</h2>
-        <figure>
-            <blockquote>Des chocolats délicieux et une belle découverte à chaque commande.</blockquote>
-            <figcaption>Camille, cliente</figcaption>
+    <h2 id="testimonials-title" class="mb-6 pt-4 text-3xl font-bold text-[#351C17]">Ils en parlent mieux que nous</h2>
+    <section aria-labelledby="testimonials-title" class="grid grid-cols-3 gap-8 py-4 pb-20">
+        <figure class="h-full min-w-0 rounded-xl bg-white p-4">
+            <p class="font-bold text-[#351C17] text-xl">Des chocolats délicieux et une belle découverte à chaque commande.</p>
+            <p class="font-bold text-[#351C17] text-lg pb-4">Camille - cliente</p>
         </figure>
-        <figure>
-            <blockquote>Une sélection soignée, parfaite pour offrir.</blockquote>
-            <figcaption>Alexandre, client</figcaption>
+        <figure class="h-full min-w-0 rounded-xl bg-white p-4">
+            <p class="font-bold text-[#351C17] text-xl">Une sélection soignée, parfaite pour offrir.</p>
+            <p class="font-bold text-[#351C17] text-lg pb-4">Alexandre - client</p>
+        </figure>
+        <figure class="h-full min-w-0 rounded-xl bg-white p-4">
+            <p class="font-bold text-[#351C17] text-xl">Je commande régulièrement chez vous, toujours satisfait.</p>
+            <p class="font-bold text-[#351C17] text-lg pb-4">Marie - cliente</p>
         </figure>
     </section>
 </main>

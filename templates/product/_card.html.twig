@@ -1,6 +1,6 @@
-<article>
-    <img src="{{ asset('images/produits/' ~ product.image) }}" alt="{{ product.name }}" class="w-60 rounded-xl shadow-md">
-    <h2 class="text-xl font-bold mb-2 text-[#351C16]">{{ product.name }}</h2>
-    <p class="text-[#71584C]">{{ product.brand }} -  {{ product.category }}</p>
-    <p class="text-lg font-semibold text-[#351C16]">{{ product.price }} €</p>
+<article class="box-border flex h-[242px] w-[306px] flex-col overflow-hidden rounded-xl bg-[#E7D6BE] p-4 shadow-md">
+    <img src="{{ asset('images/produits/' ~ product.image) }}" alt="{{ product.name }}" class="mx-auto h-28 w-full object-contain pb-4">
+    <h2 class="mb-1 line-clamp-1 text-lg font-bold text-[#351C16]">{{ product.name }}</h2>
+    <p class="line-clamp-1 text-sm text-[#71584C]">{{ product.brand }} - {{ product.category }}</p>
+    <p class="mt-auto text-lg font-semibold text-[#351C16]">{{ product.price }} €</p>
 </article>
