@@ -51,29 +51,14 @@ final class ProductTest extends WebTestCase
         );
     }
 
-    public function testProductPageDisplaysTheFilterForm(): void
+    public function testProductPageDisplaysTheFullCatalogue(): void
     {
         $client = static::createClient();
         $client->request('GET', '/product');
 
         self::assertResponseIsSuccessful();
-        self::assertSelectorExists('form[method="get"]');
-        self::assertSelectorExists('select[name="brand"]');
-        self::assertSelectorExists('select[name="brand"] option[value="Maison Cacao"]');
-        self::assertSelectorExists('select[name="category"]');
-        self::assertSelectorExists('select[name="category"] option[value="Tablettes"]');
-        self::assertSelectorExists('input[name="price"]');
-        self::assertSelectorTextContains('section[aria-label="Produits"]', 'Tablette Noir Intense');
-    }
-
-    public function testProductPageFiltersByBrandCategoryAndMaximumPrice(): void
-    {
-        $client = static::createClient();
-        $client->request('GET', '/product?brand=Maison%20Cacao&category=Tablettes&price=5');
-
-        self::assertResponseIsSuccessful();
-        self::assertSelectorTextContains('section[aria-label="Produits"]', 'Tablette au Lait');
-        self::assertSelectorTextNotContains('section[aria-label="Produits"]', 'Tablette Noir Intense');
-        self::assertSelectorTextNotContains('section[aria-label="Produits"]', 'Pralinés de Montagne');
+        self::assertSelectorCount(6, 'section[aria-label="Produits"] article');
+        self::assertSelectorTextContains('section[aria-label="Produits"] article:first-child', 'Tablette Noir Intense');
+        self::assertSelectorTextContains('section[aria-label="Produits"] article:last-child', 'Coffret des Alpes');
     }
 }

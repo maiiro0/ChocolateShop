@@ -31,8 +31,8 @@ final class HomeController extends AbstractController
             ->setMessage('Offrez du plaisir')
             ->setTitle('Coffrets gourmands')
             ->setContent('Des assortiments raffinés pour toutes les occasions.')
-            ->setButtonLink('/product?category=Coffrets')
-            ->setButtonText('Découvrir les coffrets');
+            ->setButtonLink($this->generateUrl('app_products'))
+            ->setButtonText('Voir le catalogue');
 
         return $this->render('home/index.html.twig', [
             'slides' => [$sliderOne, $sliderTwo, $sliderThree],

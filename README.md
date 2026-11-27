@@ -43,4 +43,4 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:migrations:status
 ```
 
-La migration initiale crée des tables vides. Les produits de démonstration affichés sur le site viennent actuellement du catalogue PHP. Après avoir récupéré une nouvelle migration sur `main`, relancer `doctrine:migrations:migrate`.
+La migration initiale crée des tables vides. Les produits de démonstration du catalogue sont définis dans `src/Service/ProductCatalog.php`. Après avoir récupéré une nouvelle migration sur `main`, relancer `doctrine:migrations:migrate`.
