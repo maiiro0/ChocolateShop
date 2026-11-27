@@ -1,18 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact - Chocoshop{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
-<div class="contact-page">
-    <p>Entrer en contact</p>
-    <h1>Nous serions ravis d'avoir de vos nouvelles.</h1>
-    {{ form_start(form) }}
-        {{ form_row(form.lastName) }}
-        {{ form_row(form.firstName) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.message) }}
-        <button type="submit">Envoyer</button>
-    {{ form_end(form) }}
-</div>
+    <p>CHOCOLATERIE ARTISANALE · DEPUIS 1998</p>
+    <h1>Nous contacter</h1>
+    <p>Une question sur un chocolat ou un coffret ? Écrivez à notre équipe</p>
+
+    <section class="flex flex-col">
+        <div>
+            <p>La chocolaterie</p>
+        </div>
+        <div>
+            <p>Adresse</p>
+            <p>12 rue du Cacao, Paris</p>
+        </div>
+
+        <div>
+            <p>E-mail</p>
+            <p>contact@chocoshop.fr</p>
+        </div>
+
+        <div>
+            <p>Téléphone</p>
+            <p>01 23 45 67 89</p>
+        </div>
+        <div>
+            <img src="{{ asset('images/Cabosse-3.svg') }}" alt="Chocolaterie">
+        </div>
+    </section>
+
+    <form method="post" action="" class="flex flex-col gap-y-10 w-2xl">
+        <p class="text-[#351C16] font-bold text-2xl">Votre message</p>
+        <div class="flex flex-row gap-x-10">
+            <div class="flex flex-col gap-y-2 w-1/2">
+                <label for="lastName" class="text-[#351C16] font-bold">Nom</label>
+                <input type="text" id="lastName" name="lastName" class="bg-[#FFFCF7] rounded-md border-2 p-2 border-[#D7C8B6]">
+            </div>
+
+            <div class="flex flex-col gap-y-2 w-1/2">
+                <label for="firstName" class="text-[#351C16] font-bold">Prénom</label>
+                <input type="text" id="firstName" name="firstName" class="bg-[#FFFCF7] rounded-md border-2 p-2 border-[#D7C8B6]">
+            </div>
+        </div>
+        <div class="flex flex-row gap-x-10">
+            <div class="flex flex-col gap-y-2 w-1/2">
+                <label for="email" class="text-[#351C16] font-bold">E-mail</label>
+                <input type="email" id="email" name="email" class="bg-[#FFFCF7] rounded-md border-2 p-2 border-[#D7C8B6]">
+            </div>
+
+            <div class="flex flex-col gap-y-2 w-1/2">
+                <label for="phone" class="text-[#351C16] font-bold">Téléphone</label>
+                <input type="tel" id="phone" name="phone" class="bg-[#FFFCF7] rounded-md border-2 p-2 border-[#D7C8B6]">
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-y-2 w-full">
+            <label for="message" class="text-[#351C16] font-bold">Message</label>
+            <textarea id="message" name="message" rows="5" class="bg-[#FFFCF7] rounded-md border-2 p-2 border-[#D7C8B6]"></textarea>
+        </div>
+        <div class="flex">
+            <button type="submit" class="bg-[#351C16] text-[#FFFCF7] font-bold p-3 rounded-2xl">Envoyer le message</button>
+        </div>
+    </form>
 {% endblock %}
