@@ -22,4 +22,29 @@ final class ProductCatalog
     {
         return array_slice(self::PRODUCTS, 0, 3);
     }
+
+    // filtre des produits
+    public function getFilteredProducts(string $prixMax, string $categorie, string $marque): array 
+    {
+        $resultats = [];
+
+        //Pour chaque produits, on pose 3 questions, est ce que le prix, la catégorie ou la marque convient ?
+        //La comparaison $variable === '' permet de laisser le champ vide
+
+        foreach($this->getProducts() as $produit) {
+            
+            // Si le prix est inférieur ou égal au prix maximum, float convertit le prix reçu dans l'URL
+            $prixOk = $prixMax === '' || $produit['price'] <= (float)$prixMax;
+
+            $categorieOk = $categorie === '' || $produit['category'] === $categorie;
+
+            $marqueOk = $marque === '' || $produit['brand'] === $marque;
+
+            if ($prixOk && $categorieOk && $marqueOk) {
+                $resultats[] = $produit;
+            }
+        }
+
+        return $resultats;
+    }
 }
