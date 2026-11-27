@@ -9,13 +9,61 @@
                 <p>Catalogue</p>
             {% endblock %}
         {% endembed %}
+        <form
+            id="product-filters"
+            method="get"
+            action="{{ path('app_products') }}"
+            class="my-4 flex flex-wrap items-end gap-4"
+        >
 
-        <section aria-label="Produits">
+            <label class="flex flex-col">
+                Prix maximum (€)
+                <input
+                    type="number"
+                    name="price"
+                    min="0"
+                    step="0.01"
+                    value="{{ prixMax }}"
+                    class="rounded border px-2 py-1"
+                >
+            </label>
+
+            <label class="flex flex-col">
+                Catégorie
+                <select id="category" name="category" class="rounded border px-2 py-1">
+                    <option value="">Toutes les catégories</option>
+                    {% for choix in categories %}
+                        <option value="{{ choix }}" {% if choix == categorie %}selected{% endif %}>
+                            {{ choix }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label class="flex flex-col">
+                Marque
+                <select id="brand" name="brand" class="rounded border px-2 py-1">
+                    <option value="">Toutes les marques</option>
+                    {% for choix in brands %}
+                        <option value="{{ choix }}" {% if choix == marque %}selected{% endif %}>
+                            {{ choix }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <button type="submit" class="rounded bg-primary px-4 py-1 text-white">
+                Filtrer
+            </button>
+
+            <a href="{{ path('app_products') }}">Tout afficher</a>
+        </form>
+        <section id="product-list" aria-label="Produits">
             {% for product in products %}
                 {% include 'product/_card.html.twig' with {product: product} only %}
             {% else %}
-                <p>Aucun produit à afficher.</p>
-            {% endfor %}
+                <p>Aucun produit ne correspond à ta recherche.</p>
+            {% endfor %}    
         </section>
     </main>
-{% endblock %}
+{% endblock %}  
