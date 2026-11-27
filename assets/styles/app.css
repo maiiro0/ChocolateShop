@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+    --color-primary: #351C16;
+    --color-secondary: #EDE0CE;
+    --color-background: #F7F2E8;
+}
+
+@utility page-content {
+    @apply mx-auto w-full max-w-[90rem] px-8;
+}
+
 body {
-    background-color: skyblue;
+    background-color: var(--color-background);
 }
 
 .contact-page {
@@ -9,4 +19,9 @@ body {
     max-width: 800px;
     width: 95%;
     font: 18px/1.5 sans-serif;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
 }

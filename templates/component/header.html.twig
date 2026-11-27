@@ -1,9 +1,11 @@
-<header>
-    <nav>
-        <ul>
+<header class="mb-4 bg-secondary py-4 text-primary">
+    <nav class="page-content flex items-center justify-between">
+        <h1>CHOCOSHOP</h1>
+        <ul class="flex flex-wrap items-center gap-5">
             <li><a href="{{ path('app_home') }}">Accueil</a></li>
             <li><a href="{{ path('app_products') }}">Produits</a></li>
             <li><a href="{{ path('app_contact') }}">Contact</a></li>
+            <li class="rounded-2xl bg-primary text-white px-4 py-1">Panier • 0</li>
         </ul>
     </nav>
 </header>
