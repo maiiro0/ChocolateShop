@@ -10,6 +10,34 @@
     @apply mx-auto w-full max-w-[90rem] px-8;
 }
 
+@utility form-field {
+    @apply rounded-md border-2 border-[#D7C8B6] bg-[#FFFCF7] p-2;
+}
+
+@utility form-label {
+    @apply font-bold text-primary;
+}
+
+@utility pill {
+    @apply rounded-2xl bg-primary px-4 py-1 text-white;
+}
+
+select.form-field {
+    appearance: none;
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 6 5 5 5-5' fill='none' stroke='%23351C16' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    background-position: right 0.75rem center;
+}
+
+@media (forced-colors: active) {
+    select.form-field {
+        appearance: auto;
+        background-image: none;
+    }
+}
+
 body {
     background-color: var(--color-background);
 }

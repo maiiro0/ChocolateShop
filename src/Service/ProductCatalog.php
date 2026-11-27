@@ -4,18 +4,6 @@ namespace App\Service;
 
 final class ProductCatalog
 {
-    private const array BRANDS = [
-        'Maison Cacao',
-        'Chocolaterie des Alpes',
-        'Douceur de Paris',
-    ];
-
-    private const array CATEGORIES = [
-        'Tablettes',
-        'Bonbons',
-        'Coffrets',
-    ];
-
     private const array PRODUCTS = [
         ['name' => 'Tablette Noir Intense', 'price' => 5.50, 'brand' => 'Maison Cacao', 'category' => 'Tablettes', 'image' => 'TabletteNoir.svg'],
         ['name' => 'Pralinés de Montagne', 'price' => 12.90, 'brand' => 'Chocolaterie des Alpes', 'category' => 'Bonbons', 'image' => 'CoffretPralines.svg'],
@@ -31,18 +19,6 @@ final class ProductCatalog
         ['name' => 'Assortiment de fête', 'price' => 32.00, 'brand' => 'Chocolaterie des Alpes', 'category' => 'Coffrets', 'image' => 'TruffesCacao.svg'],
     ];
 
-
-    public function getBrands(): array
-    {
-        return self::BRANDS;
-    }
-
-    public function getCategories(): array
-    {
-        return self::CATEGORIES;
-    }
-
-
     public function getProducts(): array
     {
         return self::PRODUCTS;
@@ -53,26 +29,28 @@ final class ProductCatalog
         return self::PRODUCTS;
     }
 
-    public function getFilteredProducts(?string $brand, ?string $category, ?float $maximumPrice): array
+    // filtre des produits
+    public function getFilteredProducts(string $prixMax, string $categorie, string $marque): array 
     {
-         $filteredProducts = [];
+        $resultats = [];
 
-         foreach (self::PRODUCTS as $product) {
-             if (null !== $brand && $product['brand'] !== $brand) {
-                 continue;
-             }
+        //Pour chaque produits, on pose 3 questions, est ce que le prix, la catégorie ou la marque convient ?
+        //La comparaison $variable === '' permet de laisser le champ vide
 
-             if (null !== $category && $product['category'] !== $category) {
-                 continue;
-             }
+        foreach($this->getProducts() as $produit) {
+            
+            // Si le prix est inférieur ou égal au prix maximum, float convertit le prix reçu dans l'URL
+            $prixOk = $prixMax === '' || $produit['price'] <= (float)$prixMax;
 
-             if (null !== $maximumPrice && $product['price'] > $maximumPrice) {
-                 continue;
-             }
+            $categorieOk = $categorie === '' || $produit['category'] === $categorie;
 
-             $filteredProducts[] = $product;
-         }
+            $marqueOk = $marque === '' || $produit['brand'] === $marque;
 
-         return $filteredProducts;
+            if ($prixOk && $categorieOk && $marqueOk) {
+                $resultats[] = $produit;
+            }
+        }
+
+        return $resultats;
     }
 }
