@@ -59,11 +59,11 @@
             <a href="{{ path('app_products') }}">Tout afficher</a>
         </form>
         <section id="product-list" aria-label="Produits">
-            {% for product in products %}
-                {% include 'product/_card.html.twig' with {product: product} only %}
+            {% if products %}
+                {% include 'product/_carousel.html.twig' with {products: products, label: 'Produits du catalogue'} only %}
             {% else %}
                 <p>Aucun produit ne correspond à ta recherche.</p>
-            {% endfor %}    
+            {% endif %}
         </section>
     </main>
 {% endblock %}  
