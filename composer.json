@@ -86,6 +86,12 @@
         "symfony/polyfill-php84": "*"
     },
     "scripts": {
+        "tailwind:build": "@php bin/console tailwind:build",
+        "tailwind:refresh": [
+            "@php bin/console tailwind:build",
+            "@php bin/console asset-map:compile"
+        ],
+        "tailwind:watch": "@php bin/console tailwind:build --watch",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",

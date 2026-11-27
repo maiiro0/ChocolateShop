@@ -35,7 +35,6 @@ final class HomeController extends AbstractController
             ->setButtonText('Voir le catalogue');
 
         return $this->render('home/index.html.twig', [
-            'slides' => [$sliderOne, $sliderTwo, $sliderThree],
             'bestSellers' => $productCatalog->getBestSellers(),
         ]);
     }

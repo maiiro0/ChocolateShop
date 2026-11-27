@@ -3,7 +3,6 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Product;
-use App\Entity\Slider;
 use App\Enum\ChocolateEnum;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -22,32 +21,28 @@ final class ProductTest extends WebTestCase
         self::assertNull($product->getId());
     }
 
-    public function testHomePageDisplaysTheInMemorySlider(): void
+    public function testHomePageDisplaysTheProductCarouselAndTestimonials(): void
     {
-        $slider = (new Slider())
-            ->setMessage('À découvrir')
-            ->setTitle('Nouveautés chocolatées')
-            ->setContent('Une sélection de chocolats à savourer et à partager.')
-            ->setButtonLink('/product')
-            ->setButtonText('Découvrir la collection');
-
-        self::assertSame('Nouveautés chocolatées', $slider->getTitle());
-
         $client = static::createClient();
         $client->request('GET', '/');
 
         self::assertResponseIsSuccessful();
-        self::assertSelectorTextContains(
-            'section[aria-label="À la une"]',
-            'Nouveautés chocolatées',
-        );
+        self::assertSelectorExists('[data-product-carousel]');
         self::assertSelectorTextContains(
             'section[aria-labelledby="best-sellers-title"]',
             'Tablette Noir Intense',
         );
+        self::assertCount(
+            12,
+            $client->getCrawler()->filter('[data-product-carousel] [data-carousel-slide]'),
+        );
         self::assertSelectorTextContains(
-            'section[aria-labelledby="best-sellers-title"]',
-            'Pralinés de Montagne',
+            '[data-product-carousel] [data-carousel-slide]:last-child',
+            'Assortiment de fête',
+        );
+        self::assertCount(
+            3,
+            $client->getCrawler()->filter('[aria-labelledby="testimonials-title"] figure'),
         );
     }
 

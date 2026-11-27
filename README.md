@@ -8,6 +8,22 @@ Ouvrir un terminal dans le dossier du projet. Il faut PHP 8.4.1 ou plus récent,
 composer install
 ```
 
+## Tailwind CSS
+
+En développement, laisser cette commande tourner dans un terminal pendant que le site est utilisé. Elle recompilera le CSS dès qu'une classe ou la feuille de style change.
+
+```sh
+composer tailwind:watch
+```
+
+Si `public/assets` a déjà été compilé et que le navigateur affiche encore un ancien style, ou pour publier les assets :
+
+```sh
+composer tailwind:refresh
+```
+
+En production, utiliser également `composer tailwind:refresh`. Éviter `asset-map:compile` seul en développement : le dossier compilé dans `public/assets` peut empêcher le serveur de développement de refléter les changements.
+
 ### Avec Docker
 
 Démarrer Docker, puis lancer MariaDB. Docker crée la base `app` et le compte de développement correspondant aux valeurs de `.env`.
