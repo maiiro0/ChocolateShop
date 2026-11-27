@@ -4,11 +4,10 @@
 
 {% block body %}
     <main>
-        {% embed 'component/_card.html.twig' %}
-            {% block card_content %}
-                <p>Catalogue</p>
-            {% endblock %}
-        {% endembed %}
+        {% include 'component/_card.html.twig' with {
+            title: 'Catalogue',
+            description: 'Découvrez nos chocolats par marque, catégorie ou prix.'
+        } only %}
         <form
             id="product-filters"
             method="get"
@@ -16,21 +15,22 @@
             class="my-4 flex flex-wrap items-end gap-4"
         >
 
-            <label class="flex flex-col">
-                Prix maximum (€)
+            <div class="flex flex-col gap-y-2">
+                <label for="price" class="form-label">Prix maximum (€)</label>
                 <input
                     type="number"
+                    id="price"
                     name="price"
                     min="0"
                     step="0.01"
                     value="{{ prixMax }}"
-                    class="rounded border px-2 py-1"
+                    class="form-field"
                 >
-            </label>
+            </div>
 
-            <label class="flex flex-col">
-                Catégorie
-                <select id="category" name="category" class="rounded border px-2 py-1">
+            <div class="flex flex-col gap-y-2">
+                <label for="category" class="form-label">Catégorie</label>
+                <select id="category" name="category" class="form-field">
                     <option value="">Toutes les catégories</option>
                     {% for choix in categories %}
                         <option value="{{ choix }}" {% if choix == categorie %}selected{% endif %}>
@@ -38,11 +38,11 @@
                         </option>
                     {% endfor %}
                 </select>
-            </label>
+            </div>
 
-            <label class="flex flex-col">
-                Marque
-                <select id="brand" name="brand" class="rounded border px-2 py-1">
+            <div class="flex flex-col gap-y-2">
+                <label for="brand" class="form-label">Marque</label>
+                <select id="brand" name="brand" class="form-field">
                     <option value="">Toutes les marques</option>
                     {% for choix in brands %}
                         <option value="{{ choix }}" {% if choix == marque %}selected{% endif %}>
@@ -50,15 +50,15 @@
                         </option>
                     {% endfor %}
                 </select>
-            </label>
+            </div>
 
-            <button type="submit" class="rounded bg-primary px-4 py-1 text-white">
+            <button type="submit" class="pill">
                 Filtrer
             </button>
 
-            <a href="{{ path('app_products') }}">Tout afficher</a>
+            <a href="{{ path('app_products') }}" class="pill">Tout afficher</a>
         </form>
-        <section id="product-list" aria-label="Produits">
+        <section id="product-list" aria-label="Produits" class="py-12">
             {% if products %}
                 {% include 'product/_carousel.html.twig' with {products: products, label: 'Produits du catalogue'} only %}
             {% else %}

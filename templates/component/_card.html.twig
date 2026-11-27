@@ -1,3 +1,15 @@
 <div class="border bg-primary rounded-xl p-4 text-white">
-    {% block card_content %}{% endblock %}
+    {% block card_content %}
+        <section class="grid grid-cols-2 items-center p-3 sm:flex sm:justify-between">
+            <div class="contents sm:block">
+                <p class="font-bold text-[#B57842] sm:py-4">CHOCOLATERIE ARTISANALE · DEPUIS 1998</p>
+                <h2 class="col-span-2 pb-2 text-4xl font-bold sm:pb-4 sm:text-5xl">{{ title }}</h2>
+                <p class="col-span-2 text-xl">{{ description }}</p>
+            </div>
+            <div class="col-start-2 row-start-1 flex h-24 max-w-96 shrink-0 items-center justify-end sm:h-36 sm:w-[45%]">
+                <img src="{{ asset('images/Cabosse.svg') }}" alt="" class="h-auto w-[54%] max-w-50">
+                <img src="{{ asset('images/Cabosse-2.svg') }}" alt="" class="h-auto w-[46%] max-w-44">
+            </div>
+        </section>
+    {% endblock %}
 </div>
